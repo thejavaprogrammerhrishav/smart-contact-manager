@@ -75,6 +75,8 @@ In order to solve that follow:
 
 Actually you have to disable display captcha for the specified email as gmail shows a captcha verification to
 authenticate user from unknown source and any other source that is not using proper oauth2 authentication
+
 ---
+
 There may also be a chance that image upload error is also showing, in that case you have to configure the properties of
 this project and also the settings of your database
