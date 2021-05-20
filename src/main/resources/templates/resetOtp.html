@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="base::page(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section class="main-bg d-flex justify-content-center align-items-center sec-height forgot-height">
+    <div class="card p-5 forgot-width">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-7 d-flex align-items-center justify-content-center">
+                    <img th:src="@{/img/otp.png}" alt="" class="img-fluid" style="max-height: 420px !important;">
+                </div>
+                <div class="col-md-5 p-3 mt-md-forgot">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Verification</h2>
+                            <h6>Hi. <b class="font-italic" th:text="${session.forgotUser.name}"> </b></h6>
+                            <p>Please check your email and verify the details below</p>
+                        </div>
+                    </div>
+
+                    <div class="row my-3" th:if="${session.message}">
+                        <div class="col-md-12">
+                            <div class="alert" th:classappend="${session.message.className}">
+                                <span th:text="${session.message.text}"></span>
+                                <th:block th:text="${#session.removeAttribute('message')}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <form id="resendForm" th:action="@{/resend}" method="post">
+                                <p>
+                                    Didn't Receive Email? &nbsp;&nbsp;&nbsp;
+                                    <a style="cursor: pointer; color: #000 !important;" class="font-weight-bold"
+                                       onclick="document.getElementById('resendForm').submit()">Resend Email</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <form th:action="@{/verify-otp-key}" method="post">
+                        <input type="hidden" th:value="${session.forgotUser.username}">
+                        <div class="row my-3">
+                            <div class="col-md-12 form-group">
+                                <label for="otp">Enter OTP Code</label>
+                                <input type="text" class="form-control" id="otp" name="otp" value="">
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col-md-12 form-group">
+                                <label for="verifcode">Enter Verification Code</label>
+                                <input type="text" class="form-control" id="verifcode" name="verifcode" value="">
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-success btn-md-block px-5">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span class="mx-3">Reset Password</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

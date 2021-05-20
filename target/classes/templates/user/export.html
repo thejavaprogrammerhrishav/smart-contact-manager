@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="user/privatebase::page(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<section class="main-bg content dash-height">
+    <div class="container-fluid size-100 p-5 d-flex flex-column export-data">
+        <div class="row my-2" th:if="${session.message}">
+            <div class="col-md-12 pl-0">
+                <div class="text-center alert" th:classappend="${session.message.className}">
+                    <span class="font-weight-bold text-white" th:text="${session.message.text}"></span>
+                </div>
+                <th:block th:text="${#session.removeAttribute('message')}"/>
+            </div>
+        </div>
+        <div class="card p-3 my-3">
+            <div class="card-body container-fluid">
+
+                <div class="row my-3">
+                    <div class="col-md-12">
+                        <span class="card-title font-weight-bold export-title">Export Contacts As HTML</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <p class="mb-1 card-text">Download all your contacts as an HTML representation and use it
+                            afterwards</p>
+                        <p class="font-italic">To be opened in Desktop mode only, doesn't support mobile devices</p>
+                    </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-outline-success btn-block px-5" th:href="@{/user/download/html}">
+                            <i class="fas fa-download"></i>
+                            <span class="mx-3">Download as HTML</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-3 my-3">
+            <div class="card-body container-fluid">
+                <div class="row my-3">
+                    <div class="col-md-12">
+                        <span class="card-title font-weight-bold export-title">Export Contacts As CSV</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <p class="card-text mb-1">Download all your contacts as an CSV representation and use it
+                            afterwards</p>
+                        <p class="mb-3 card-text font-italic">Please note: Images will not be a part of it.</p>
+                    </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-outline-success btn-block px-5" th:href="@{/user/download/csv}">
+                            <i class="fas fa-download"></i>
+                            <span class="mx-3">Download as CSV</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-3 my-3">
+            <div class="card-body container-fluid">
+                <div class="row my-3">
+                    <div class="col-md-12">
+                        <span class="card-title font-weight-bold export-title">Export Contacts As Excel</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <p class="mb-1 card-text">Download all your contacts as an Excel representation and use it
+                            afterwards</p>
+                        <p class="mb-3 card-text font-italic">Please note: Images will not be a part of it.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-outline-success btn-block px-3 mt-3" th:href="@{/user/download/excel/xls}">
+                                    <i class="fas fa-download"></i>
+                                    <span class="mx-2">Download as Excel [xls]</span>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a class="btn btn-outline-success btn-block px-3 mt-3" th:href="@{/user/download/excel/xlsx}">
+                                    <i class="fas fa-download"></i>
+                                    <span class="mx-2">Download as Excel [xlsx]</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

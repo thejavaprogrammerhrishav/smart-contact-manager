@@ -1,0 +1,431 @@
+body {
+    width: 100% !important;
+    background: #e2e2e2 !important;
+}
+
+.sec-height {
+    width: 100%;
+    height: calc(100vh - 56px) !important;
+}
+
+.dash-height {
+    height: calc(100vh - 56px) !important;
+}
+
+.main-bg {
+    background: #e2e2e2 !important;
+}
+
+.rows {
+    margin: 10px 0px !important;
+}
+
+.reg-card {
+    width: 50% !important;
+    height: 90% !important;
+    overflow-y: scroll;
+}
+
+/*sidebar*/
+
+.sidebar {
+    width: 20% !important;
+    float: left;
+    background: #fff;
+    display: block;
+    z-index: 100;
+}
+
+.sidebar .main {
+    padding: 15px 30px;
+}
+
+.item {
+    margin: 10px 0px !important;
+}
+
+.item a {
+    width: 100% !important;
+    height: 50px !important;
+    padding: 10px 25px !important;
+    padding-top: 13px !important;
+    display: block;
+    color: #000;
+    background: #fff;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.item a:hover {
+    color: #fff !important;
+    background: #0f6674 !important;
+}
+
+.item h3 {
+    width: 88%;
+    float: left;
+}
+
+.header {
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+    height: 40px !important;
+}
+
+.content {
+    width: 80% !important;
+    padding: 25px !important;
+    padding-bottom: 0px !important;
+    margin-left: 20% !important;
+}
+
+.dashboard{
+    padding: 25px 0px !important;
+}
+
+.show-sidebar {
+    display: none;
+}
+
+.header button {
+    display: none;
+}
+
+
+.login-width {
+    width: 75% !important;
+}
+
+.forgot-width {
+    width: 60% !important;
+}
+
+.size-100 {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.addcontact {
+    width: 95% !important;
+    height: 90% !important;
+}
+
+.theader {
+    position: sticky;
+    top: 0;
+}
+
+.content-1 {
+    height: 20% !important;
+}
+
+.content-2 {
+    height: 80% !important;
+}
+
+.contact-table {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.contact-table table tbody tr th,
+.contact-table table tbody tr td {
+    padding: 0px 12px !important;
+}
+
+.table-data-row {
+    height: 30px !important;
+    max-height: 50px !important;
+}
+
+.h-10 {
+    height: 10% !important;
+}
+
+.h-30 {
+    height: 30% !important;
+}
+
+.h-35 {
+    height: 35% !important;
+}
+
+.h-40 {
+    height: 40% !important;
+}
+
+.h-55 {
+    height: 55% !important;
+}
+
+.h-60 {
+    height: 60% !important;
+}
+
+.h-90 {
+    height: 90% !important;
+}
+
+.contact-content {
+    overflow-x: hidden;
+    overflow-y: auto !important;
+}
+
+.export-title {
+    font-size: 1.4rem !important;
+}
+
+.main-content {
+    height: 256px !important;
+}
+
+.dash-header {
+    text-align: left !important;
+}
+
+.change-password-icon{
+    font-size: 7rem !important;
+}
+
+.add-contact-header{
+    padding-bottom: 35px !important;
+}
+
+.contact-body{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+/* HOME.CSS */
+.carousel-item {
+    height: calc(70vh - 56px);
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.lnr {
+    display: inline-block;
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.05em;
+    stroke-width: 1;
+}
+
+.services-icon {
+    margin-bottom: 20px !important;
+    font-size: 60px !important;
+}
+
+.home-card{
+    height: 270px !important;
+    max-height: 270px !important;
+}
+
+.quote-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+/* HOME.CSS END */
+
+.chart{
+    max-height: 450px !important;
+}
+
+
+@media only screen and (max-width: 800px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .item h3 {
+        width: 85%;
+        float: left;
+    }
+
+    .show-sidebar {
+        display: block;
+        z-index: 100;
+    }
+
+    .header button {
+        display: block;
+    }
+
+    .sidebar {
+        display: none;
+        width: 80% !important;
+        float: left;
+        background: #fff;
+        position: fixed;
+    }
+
+    .content {
+        width: 100% !important;
+        padding: 0px !important;
+        margin-left: 0 !important;
+    }
+
+    .navbar-brand {
+        text-align: center !important;
+    }
+
+    .btn-md-block {
+        display: block;
+        width: 100% !important;
+        margin: 15px 0px !important;
+    }
+
+    .dash-height {
+        height: 100vh !important;
+    }
+
+    .login-width {
+        width: 95% !important;
+    }
+
+    .forgot-width {
+        width: 95% !important;
+        padding: 20px !important;
+        height: auto !important;
+    }
+
+    .sec-height {
+        width: 100%;
+        min-height: 100vh !important;
+        height: auto !important;
+    }
+
+    .forgot {
+        margin-top: 20px !important;
+        text-align: center !important;
+    }
+
+    .login-form {
+        padding: 30px !important;
+    }
+
+    .addcontact {
+        padding: 25px !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .reg-card {
+        width: 100% !important;
+        height: auto !important;
+        padding: 25px !important;
+    }
+
+    .main-content {
+        height: auto !important;
+    }
+
+    .dash-header {
+        text-align: center !important;
+    }
+
+    .profile-details{
+        height: auto !important;
+        margin: 20px 0px !important;
+    }
+
+    .prof-image{
+        margin: 20px 0px !important;
+
+    }
+
+    .change-password-icon{
+        font-size: 5rem !important;
+    }
+
+    .change{
+        height: calc(100vh - 56px) !important;
+    }
+
+    .change-password{
+        padding: 15px !important;
+    }
+    .change-title{
+        font-size: 28px !important;
+        margin-top: 10px !important;
+    }
+
+    .add-contact-card{
+        height: 85% !important;
+    }
+
+    .add-contact-header{
+        padding: 30px 25px !important;
+    }
+
+    .padding-0{
+        padding-left: 7px !important;
+        padding-right: 7px !important;
+    }
+
+    .contact-search{
+        margin-bottom: 25px !important;
+    }
+
+    .contact-table{
+        overflow: auto !important;
+    }
+
+    .contact-list{
+        width: 1200px !important;
+    }
+
+    .all-contact{
+        height: auto !important;
+    }
+
+    .all-contact-title{
+        font-size: 28px !important;
+        margin: 20px 0px !important;
+        text-align: center;
+    }
+
+    .contact-content-mobile{
+        padding-right: 0px !important;
+    }
+
+    .contact-body{
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    .export-data{
+        padding: 15px !important;
+    }
+
+    .mt-md-forgot{
+        margin-top: 30px !important;
+    }
+
+    .forgot-height {
+        min-height: calc(100vh - 56px) !important;
+        height: auto !important;
+    }
+
+    .dashboard-mobile{
+        padding: 0px 15px !important;
+    }
+
+    .dashboard{
+        padding: 25px 0px !important;
+    }
+
+    .chart{
+        height: auto !important;
+    }
+}

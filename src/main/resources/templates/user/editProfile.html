@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="user/privatebase::page(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<section class="main-bg content dash-height profile-details">
+    <div class="container-fluid size-100 d-flex justify-content-center align-items-center">
+        <div class="card p-5 addcontact">
+            <div class="row mx-2">
+                <div class="col-md-12 text-center">
+                    <h2 id="card-title">Edit User Details</h2>
+                </div>
+            </div>
+
+            <div class="card-body h-100" id="card-form">
+                <div class="row my-2" th:if="${session.message}">
+                    <div class="col-md-12 px-0">
+                        <div class="mb-0 text-center alert" th:classappend="${session.message.className}">
+                            <span class="font-weight-bold" th:text="${session.message.text}"></span>
+                        </div>
+                    </div>
+                    <th:block th:text="${#session.removeAttribute('message')}"/>
+                </div>
+                <form class="h-100" enctype="multipart/form-data" method="post" novalidate
+                      th:action="@{/user/edit-profile}"
+                      th:object="${user}">
+                    <div class="container-fluid px-0 h-100">
+                        <div class="row h-50">
+                            <div class="col-md-4 px-0 h-100 text-center">
+                                <div class="row h-100 prof-image">
+                                    <div class="col-md-12 h-100 text-center">
+                                        <img alt="" class="border border-secondary img-fluid" th:src="${profilePic}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 offset-md-1 h-100">
+                                <div class="row my-2">
+                                    <div class="col-md-12 form-group">
+                                        <label for="name">Name</label>
+                                        <input class="form-control" id="name" name="name"
+                                               th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                               th:value="${user.name}"
+                                               type="text">
+                                        <div class="invalid-feedback" th:each="e: ${#fields.errors('name')}"
+                                             th:text="${e}">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-2">
+                                    <div class="col-md-12 form-group">
+                                        <label for="email">Email ID</label>
+                                        <input class="form-control" id="email" name="email"
+                                               th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+                                               th:value="${user.email}"
+                                               type="email">
+                                        <div class="invalid-feedback" th:each="e: ${#fields.errors('email')}"
+                                             th:text="${e}">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-2">
+                                    <div class="col-md-6 form-group">
+                                        <label for="contact">Contact No.</label>
+                                        <input class="form-control" id="contact" name="contact"
+                                               th:classappend="${#fields.hasErrors('contact') ? 'is-invalid' : ''}"
+                                               th:value="${user.contact}"
+                                               type="text">
+                                        <div class="invalid-feedback" th:each="e: ${#fields.errors('contact')}"
+                                             th:text="${e}">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Select Profile Image</label>
+                                        <div class="custom-file">
+                                            <input class="custom-file-input" id="profimg" name="profimg"
+                                                   onchange="imgChange()"
+                                                   type="file">
+                                            <label class="custom-file-label" for="profimg" id="imgLbl">Choose File</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row my-2">
+                            <div class="col-md-8 contact-table form-group">
+                                <label for="about">About</label>
+                                <textarea class="form-control" id="about" name="about" rows="4"
+                                          th:classappend="${#fields.hasErrors('about') ? 'is-invalid' : ''}"
+                                          th:text="${user.about}"
+                                          th:value="${user.about}"> </textarea>
+                                <div class="invalid-feedback" th:each="e: ${#fields.errors('about')}" th:text="${e}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <label>Username</label>
+                                        <p class="mb-0" th:text="${'@ '+user.username}"></p>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-12 form-group">
+                                        <label>Date of Account Creation</label>
+                                        <p class="mb-0" th:text="${createDate}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-5 pt-2">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-success btn-md-block px-5 mx-3" type="submit">
+                                    <i class="fas fa-edit"></i>
+                                    <span class="mx-2">Save Details</span>
+                                </button>
+                                <a class="btn btn-outline-secondary btn-md-block px-5 mx-3" th:href="@{/user/profile}"
+                                        type="button">
+                                    <i class="fas fa-close"></i>
+                                    <span class="mx-2">Cancel</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/script.js}"></script>
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="base::page(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section class="main-bg d-flex justify-content-center align-items-center sec-height forgot-height">
+    <div class="card p-5 forgot-width">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-7 d-flex align-items-center justify-content-center">
+                    <img th:src="@{/img/forgot.png}" alt="" class="img-fluid" style="max-height: 420px !important;">
+                </div>
+                <div class="col-md-5 p-3 mt-md-forgot">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Forgot Password</h3>
+                            <p>Please Enter The Credentials Correctly</p>
+                        </div>
+                    </div>
+
+                    <div class="row my-2" th:if="${session.message}">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <span th:text="${session.message.text}"></span>
+                                <th:block th:text="${#session.removeAttribute('message')}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form th:action="@{/forgot}" method="post" th:object="${forgot}">
+                        <div class="row my-3">
+                            <div class="col-md-12 form-group">
+                                <label for="username">Enter Username</label>
+                                <input type="text" class="form-control" id="username" name="username"
+                                       th:value="${forgot.username}">
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col-md-12 form-group">
+                                <label for="email">Enter Email ID</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                       th:value="${forgot.email}">
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-md-block px-5">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span class="mx-3">Reset Password</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

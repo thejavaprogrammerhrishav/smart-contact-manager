@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::page(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section class="main-bg d-flex justify-content-center align-items-center sec-height">
+    <div class="card p-5 reg-card">
+        <div class="row rows">
+            <div class="col-md-12 text-center">
+                <h1>Create New Account</h1>
+                <p>Please fill the fields correctly</p>
+                <p><b>*</b> All fields are mandatory</p>
+            </div>
+        </div>
+        <div th:if="${session.message}" class="row rows">
+            <div class="col-md-12">
+                <div class="text-center alert" th:classappend="${session.message.className}"
+                     th:text="${session.message.text}">
+                </div>
+            </div>
+            <th:block th:text="${#session.removeAttribute('message')}"/>
+        </div>
+        <form novalidate th:action="@{/doRegister}" method="post" th:object="${user}" enctype="multipart/form-data">
+            <div class="my-3">
+                <div class="row rows my-3">
+                    <h3>Personal Details</h3>
+                </div>
+                <div class="row rows">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label for="name">Enter Name</label>
+                            <input type="text" id="name" name="name" class="form-control" th:value="${user.name}"
+                                   th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:each="e: ${#fields.errors('name')}" th:text="${e}">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="contact">Enter Contact</label>
+                            <input type="text" id="contact" name="contact" class="form-control"
+                                   th:value="${user.contact}"
+                                   th:classappend="${#fields.hasErrors('contact') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:each="e: ${#fields.errors('contact')}" th:text="${e}">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row rows">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email">Enter Email</label>
+                            <input type="email" id="email" name="email" class="form-control" th:value="${user.email}"
+                                   th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:each="e: ${#fields.errors('email')}" th:text="${e}">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row rows">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="about">Enter Something About Yourself</label>
+                            <textarea name="about" id="about" cols="30" rows="5" class="form-control"
+                                      th:text="${user.about}"
+                                      th:classappend="${#fields.hasErrors('about') ? 'is-invalid' : ''}"></textarea>
+                            <div class="invalid-feedback" th:each="e: ${#fields.errors('about')}" th:text="${e}">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row rows">
+                    <div class="col-md-12">
+                        <label>Select Profile Image</label>
+                        <div class="custom-file">
+                            <input type="file" id="profimg" onchange="imgChange()" name="profimg"
+                                   class="custom-file-input">
+                            <label for="profimg" id="imgLbl" class="custom-file-label">Choose File</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-3 mt-5">
+                <div class="row rows my-3">
+                    <h3>Account Credentials</h3>
+                </div>
+                <div class="row rows">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username">Enter Username</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                                   th:value="${user.username}"
+                                   th:classappend="${#fields.hasErrors('username') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:each="e: ${#fields.errors('username')}" th:text="${e}">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row rows">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="password">Enter Password</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                   th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}">
+                            <div class="invalid-feedback" th:each="e: ${#fields.errors('password')}" th:text="${e}">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" name="cpassword" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row rows">
+                <div class="col-md-6 mt-2 text-right">
+                    <button type="submit" class="btn btn-success btn-md-block px-4">
+                        <i class="fas fa-user-plus"></i>
+                        <span class="ml-3">Create my account</span>
+                    </button>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <button type="reset" class="btn btn-outline-secondary btn-md-block px-4">
+                        <i class="fas fa-sync-alt"></i>
+                        <span class="ml-3">Reset</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script th:src="@{/js/script.js}"></script>
+</section>
+</body>
+</html>

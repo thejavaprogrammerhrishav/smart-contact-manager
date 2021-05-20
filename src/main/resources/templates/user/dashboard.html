@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="user/privatebase::page(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<section class="main-bg content dashboard sec-height contact-table">
+    <div class="modal fade" id="loginModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content p-2 bg-dark">
+                <div class="modal-header p-5 bg-success text-white">
+                    <div class="container">
+                        <div class="w-100 mb-3">
+                            <i class="fas fa-user change-password-icon"></i>
+                        </div>
+                        <div class="w-100">
+                            <h1 id="staticBackdropLabel">Login Here</h1>
+                        </div>
+                        <div class="w-100">
+                            <p class="mb-0">Please Login With Your Credentials</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body p-5 border border-success bg-white change-password">
+                    <div>
+                        <p>Please Verify Yourself By Providing The Credentials Below</p>
+                    </div>
+                    <div class="container">
+                        <form th:action="@{/user/authenticate}" method="post">
+                            <div class="row my-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="username">Enter Username</label>
+                                        <input type="text" name="username" id="username" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="password">Enter Password</label>
+                                        <input type="password" name="password" id="password" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12 pt-2">
+                                    <button class="btn btn-success btn-md-block px-5 mr-3">
+                                        <i class="fas fa-user"></i>
+                                        <span class="mx-2">Login To My Account</span>
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-md-block px-5" data-dismiss="modal">
+                                        <i class="fas fa-close"></i>
+                                        <span class="mx-2">Cancel</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <div class="container-fluid px-5 dashboard-mobile">
+        <div class="row">
+            <div class="col-md-12 dash-header">
+                <h1>Dashboard</h1>
+            </div>
+        </div>
+        <div class="my-3" th:if="${session.message}">
+            <div class="mb-0 alert text-center" th:classappend="${session.message.className}">
+                <span class="font-weight-bold text-white" th:text="${session.message.text}"></span>
+            </div>
+            <th:block th:text="${#session.removeAttribute('message')}"/>
+        </div>
+        <div class="row main-content">
+            <div class="col-md-6 mt-3">
+                <div class="card p-4 h-100">
+                    <div class="row mb-2">
+                        <div class="col-md-6">Name</div>
+                        <div class="col-md-6 text-lg-right text-md-left">
+                            <span th:text="${user.name}"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-6">Contact</div>
+                        <div class="col-md-6 text-lg-right text-md-left">
+                            <span th:text="${user.contact}"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-6">Email</div>
+                        <div class="col-md-6 text-lg-right text-md-left">
+                            <span th:text="${user.email}"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-6">Date</div>
+                        <div class="col-md-6 text-lg-right text-md-left">
+                            <span th:text="${userDate}"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-4 text-lg-center">
+                        <div class="col-md-6">
+                            <a class="btn btn-primary btm-sm btn-md-block px-4" th:href="@{/user/profile}">
+                                <i class="fas fa-user"></i>
+                                <span class="ml-2">Update Profile</span>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-success btm-sm btn-md-block px-4 ml-2" data-toggle="modal"
+                                    data-target="#loginModal">
+                                <i class="fas fa-lock"></i>
+                                <span class="ml-2">Change Password</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mt-3">
+                <div class="card p-5 h-100 d-flex align-items-center justify-content-center">
+                    <div class="display-4">
+                        <span th:text="${totalCount}"> </span>
+                    </div>
+                    <div class="mt-4">
+                        <h3>
+                            <b class="text-secondary">Total Contacts</b>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mt-3">
+                <div class="card p-4 h-100 d-flex justify-content-center">
+                    <div class="row my-2">
+                        <div class="col-md-12 text-center">
+                            <h3>Statistics</h3>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <span>Total Today</span>
+                        </div>
+                        <div class="col-6 text-right">
+                            <span class="font-weight-bold" th:text="${todayCount}"></span>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <span>Total This Week</span>
+                        </div>
+                        <div class="col-6 text-right">
+                            <span class="font-weight-bold" th:text="${weekCount}"></span>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-6">
+                            <span>Total This Month</span>
+                        </div>
+                        <div class="col-6 text-right">
+                            <span class="font-weight-bold" th:text="${monthCount}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-white mt-4 pt-4">
+            <div class="row">
+                <div class="col-md-2 offset-md-10 mr-2">
+                    <form id="yearForm" th:action="@{/user/dashboard}" method="post">
+                        <div class="form-group">
+                            <select name="year" id="year" class="form-control" onchange="yearClick()">
+                                <option th:each="e:${years}" th:value="${e}" th:text="${e}"
+                                        th:selected="${#strings.equals(e,currentYear)}"></option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="px-3 py-3">
+                        <canvas id="contactchart" class="chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var yearClick = () => {
+            var form = document.getElementById('yearForm');
+            form.submit();
+        }
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
+    <script th:inline="javascript">
+        var htmldata = [[${data}]];
+        var ctx = document.getElementById('contactchart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Object.keys(htmldata).map(m => m.toString()),
+                datasets: [{
+                    label: "Total Contact Data",
+                    data: Object.keys(htmldata).map(k => htmldata[k]),
+                    backgroundColor: ['blue']
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Contact Data Entry Trends',
+                        font: {
+                            size: 20
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Months'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'No. of Contacts'
+                        },
+                        ticks: {
+                            min: 0, // it is for ignoring negative step.
+                            beginAtZero: true,
+                            precision: 0,
+                        },
+                    }
+                }
+            }
+        });
+    </script>
+</section>
+</body>
+</html>

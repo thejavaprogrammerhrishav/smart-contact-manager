@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="page(content)" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title th:text="${title}">Smart Contact Manager</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <i class="fas fa-th-large fa-2x mr-3 show-sidebar text-white" onclick="displaySide()"></i>
+        <a class="navbar-brand" th:href="@{/}">Smart Contact Manager</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link text-uppercase" th:text="${user.name}"></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link text-uppercase" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="sidebar dash-height">
+    <div class="main">
+        <div class="item header">
+            <h3>Actions</h3>
+            <button class="btn btn-light border-0 bg-white" onclick="closeSide()">
+                <i class="fas fa-close"></i>
+            </button>
+        </div>
+        <div class="item">
+            <a th:href="@{/user/dashboard}">
+                <i class="mr-2 fa fa-th-large"></i>
+                <span>Dashboard</span>
+            </a>
+        </div>
+        <div class="item">
+            <a th:href="@{/user/add-contact}">
+                <i class="mr-2 fa fa-user-plus"></i>
+                <span>Add Contact</span>
+            </a>
+        </div>
+        <div class="item">
+            <a th:href="@{/user/all-contact}">
+                <i class="mr-2 fa fa-users"></i>
+                <span>All Contact</span>
+            </a>
+        </div>
+        <div class="item">
+            <a th:href="@{/user/export}">
+                <i class="mr-2 fa fa-download"></i>
+                <span>Export Contact</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="${content}"></div>
+
+<script>
+    const displaySide = () => {
+        $('.sidebar').css('display', 'block');
+    }
+
+    const closeSide = () => {
+        $('.sidebar').css('display', 'none');
+    }
+</script>
+
+</body>
+</html>

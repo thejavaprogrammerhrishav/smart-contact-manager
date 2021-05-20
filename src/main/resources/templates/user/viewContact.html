@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="user/privatebase::page(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<section class="main-bg content dash-height profile-details">
+    <div class="container-fluid size-100 d-flex justify-content-center align-items-center">
+        <div class="card p-5 addcontact change-password">
+            <div class="card-header">
+                <div class="row my-3 mx-2">
+                    <div class="col-md-12">
+                        <h2 class="all-contact-title">Contact Details</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body h-100 contact-body">
+                <div class="container-fluid">
+                    <div class="row my-2" th:if="${session.message}">
+                        <div class="col-md-12 px-0">
+                            <div class="text-center alert" th:classappend="${session.message.className}">
+                                <span class="font-weight-bold" th:text="${session.message.text}"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="container-fluid px-0 contact-content" th:classappend="${session.message != null ? 'h-90' : 'h-100'}"
+                     th:if="${contact != null}">
+                    <th:block th:text="${#session.removeAttribute('message')}"/>
+                    <div class="row my-2">
+                        <div class="col-md-4 text-center">
+                            <div>
+                                <img alt="" class="border border-secondary img-fluid" style="height: 230px !important"
+                                     th:src="${profilePic}">
+                            </div>
+                            <div class="my-4">
+                                <h3><b th:text="${contact.name}"></b></h3>
+                                <p th:text="${contact.nickname}"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-7 offset-md-1">
+                            <div class="row my-2">
+                                <div class="col-md-12">
+                                    <h5><b>Work</b></h5>
+                                    <p th:text="${contact.work}"></p>
+                                </div>
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-md-12">
+                                    <h5><b>Email</b></h5>
+                                    <p th:text="${contact.email}"></p>
+                                </div>
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-md-4">
+                                    <h5><b>Contact 1</b></h5>
+                                    <p th:text="${contact.contact1}"></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5><b>Contact 2</b></h5>
+                                    <p th:text="${contact.contact2}"></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5><b>Contact 3</b></h5>
+                                    <p th:text="${contact.contact3}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row my-3">
+                        <div class="col-md-12 contact-table">
+                            <h5><b>About</b></h5>
+                            <p th:text="${contact.about}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 pt-3">
+                        <div class="col-md-6 px-0 text-center">
+                            <form class="mx-3" method="post" th:action="@{/user/edit}">
+                                <input name="id" th:value="${contact.id}" type="hidden">
+                                <button class="btn btn-warning btn-md-block px-5 mx-3 btn-md-block" type="submit">
+                                    <i class="fas fa-edit"></i>
+                                    <span class="mx-2">Edit Contact</span>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-6 px-0 text-center">
+                            <form class="mx-3" method="post" th:action="@{/user/delete}" th:id="'deleteForm'+${contact.id}">
+                                <input name="id" th:value="${contact.id}" type="hidden">
+                                <button class="btn btn-danger btn-md-block px-5 mx-3 btn-md-block" th:onclick="|deleteClick(${contact.id})|"
+                                        type="button">
+                                    <i class="fas fa-trash"></i>
+                                    <span class="mx-2">Delete Contact</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const deleteClick = e => {
+            var form = $('#deleteForm' + e);
+
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this contact data!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        }
+    </script>
+</section>
+
+
+</body>
+</html>

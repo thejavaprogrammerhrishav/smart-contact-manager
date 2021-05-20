@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="user/privatebase::page(~{::section})" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<section class="main-bg content dash-height all-contact">
+    <div class="container-fluid size-100 d-flex justify-content-center align-items-center">
+        <div class="card p-5 my-4 addcontact change-password">
+            <div class="row my-1">
+                <div class="col-md-2">
+                    <h2 class="all-contact-title">All Contacts</h2>
+                </div>
+                <div class="col-md-10 text-right">
+                    <a class="btn btn-outline-primary btn-md-block px-5" th:href="@{/user/all-contact}">
+                        <i class="fas fa-sync-alt"></i>
+                        <span class="mx-2">All Contacts</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-body h-100">
+                <div class="content-1">
+                    <form id="searchForm" method="POST" th:action="@{/user/all-contact}">
+                        <div class="row my-2" th:if="${searchBy != 'select' && search != ''}">
+                            <p>Searched Database By <b class="mx-2 font-italic"
+                                                       th:text="${#strings.toUpperCase(searchBy)}"></b> With Text <b
+                                    class="font-italic mx-2" th:text="${search}"></b>
+                            </p>
+                        </div>
+                        <div class="row my-2 contact-search">
+                            <div class="col-md-3 px-0">
+                                <div class="row rows">
+                                    <div class="col-md-4 px-0">
+                                        <p class="mt-2">Search By</p>
+                                    </div>
+                                    <div class="col-md-8 px-0 form-group">
+                                        <select class="form-control" id="searchBy" name="searchBy">
+                                            <option selected th:selected="${searchBy == 'select'}" value="select">Select
+                                                Option
+                                            </option>
+                                            <option th:selected="${searchBy == 'name'}" value="name">Name</option>
+                                            <option th:selected="${searchBy == 'nickname'}" value="nickname">Nick Name
+                                            </option>
+                                            <option th:selected="${searchBy == 'work'}" value="work">Work</option>
+                                            <option th:selected="${searchBy == 'contact'}" value="contact">Contact
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 px-0 offset-md-5 text-right">
+                                <input class="form-control" id="search" name="search" placeholder="Search Contact"
+                                       th:value="${search}" type="text">
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="row my-2" th:if="${session.message}">
+                        <div class="col-md-12 pl-0">
+                            <div class="text-center alert" th:classappend="${session.message.className}">
+                                <span class="font-weight-bold" th:text="${session.message.text}"></span>
+                            </div>
+                        </div>
+                        <th:block th:text="${#session.removeAttribute('message')}"/>
+                    </div>
+                </div>
+
+                <div class="row my-2 content-2">
+                    <div class="col-md-12 px-0 h-100 contact-table">
+                        <table class="table table-borderless table-hover contact-list">
+                            <thead class="thead-light theader">
+                            <tr>
+                                <th class="theader">#</th>
+                                <th class="theader" colspan="3">Name</th>
+                                <th class="theader" colspan="3">Contact</th>
+                                <th class="theader" colspan="2">Email</th>
+                                <th class="theader" colspan="2">Work</th>
+                                <th class="theader" colspan="2">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="table-data-row" th:each="e:${contacts}">
+                                <th class="table-data-row" th:text="${e.id}" width="5%"></th>
+                                <td class="table-data-row" colspan="3" width="30%">
+                                    <span th:text="${e.name}"></span>
+                                </td>
+                                <td class="table-data-row" colspan="3"
+                                    th:text="${#strings.concat(e.contact1, ', ', e.contact2, ', ', e.contact3)}"
+                                    width="20%"></td>
+                                <td class="table-data-row" colspan="2" th:text="${e.email}" width="20%"></td>
+                                <td class="table-data-row" colspan="2" th:text="${e.work}" width="15%"></td>
+                                <td class="table-data-row" colspan="2" width="10%">
+                                    <a class="btn btn-outline-primary btn-sm mr-2 btn-block"
+                                       th:href="@{'/user/contact/' + ${e.id}}">
+                                        <i class="fas fa-eye"></i>
+                                        <span class="ml-2">View</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(() => {
+            $('#search').onkeypress(e => {
+                if (e.which === 13) {
+                    $('#searchForm').submit();
+                }
+            });
+        });
+    </script>
+</section>
+
+
+</body>
+</html>
