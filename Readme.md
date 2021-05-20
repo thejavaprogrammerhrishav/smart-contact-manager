@@ -78,5 +78,3 @@ authenticate user from unknown source and any other source that is not using pro
 ---
 There may also be a chance that image upload error is also showing, in that case you have to configure the properties of
 this project and also the settings of your database
-
-# smart-contact-manager
